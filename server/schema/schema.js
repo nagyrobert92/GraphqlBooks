@@ -15,7 +15,6 @@ var books = [
   { name: "Name of the Wind", genre: "Fantasy", id: "1", authorId: "1" },
   { name: "The Final Empire", genre: "Fantasy", id: "2", authorId: "2" },
   { name: "The Long Earth", genre: "Sci-Fi", id: "3", authorId: "3" },
-  { name: "The Long Earth", genre: "Sci-Fi", id: "3", authorId: "3" },
   { name: "The Colour of Magic", genre: "Fantasy", id: "5", authorId: "3" },
   { name: "The Light Fantastic", genre: "Fantasy", id: "6", authorId: "3" }
 ];
@@ -72,6 +71,18 @@ const RootQuery = new GraphQLObjectType({
       args: { id: { type: GraphQLID } },
       resolve(parent, args) {
         return _.find(authors, { id: args.id });
+      }
+    },
+    books: {
+      type: new GraphQLList(BookType),
+      resolve(parent, args) {
+        return books;
+      }
+    },
+    authors: {
+      type: new GraphQLList(AuthorType),
+      resolve(parent, args) {
+        return authors;
       }
     }
   }
